@@ -1,0 +1,57 @@
+https://gitlab.com/gitlab-org/omnibus-gitlab
+https://linuxconfig.org/how-to-check-nginx-status-on-ubuntu
+https://docs.gitlab.com/omnibus/maintenance/
+ 
+----------------------------nginx-----------------------------------
+systemctl status nginx 
+curl http://127.0.0.1/nginx_status
+sudo lsof -i :80 -s TCP:LISTEN
+sudo tail -f /var/log/nginx/access.log /var/log/nginx/error.log
+
+---------------------------gitlab------------------------------------
+
+sudo gitlab-ctl status [nginx]
+Restart every service. $ sudo gitlab-ctl restart
+Restart a specific service. $ sudo gitlab-ctl restart [nginx]
+
+Display the logs of every service and keep reading until Ctrl + C is pressed
+sudo gitlab-ctl tail
+
+Display the logs of a specific service
+sudo gitlab-ctl tail [nginx]
+
+Starting and stopping
+# Start all GitLab components
+sudo gitlab-ctl start
+
+# Stop all GitLab components
+sudo gitlab-ctl stop
+
+# Restart all GitLab components
+sudo gitlab-ctl restart
+
+Note that on a single-core server it may take up to a minute to restart Puma and Sidekiq. Your GitLab instance will give a 502 error until Puma is up again.
+
+sudo gitlab-ctl restart sidekiq
+sudo gitlab-ctl hup puma
+
+Try specifying an external_url in /etc/gitlab/gitlab.rb. Also check your firewall settings; port 80 (HTTP) or 443 (HTTPS) might be closed on your GitLab server.
+
+SHA256:BJVFW5SeZG7xFbDSOywJ2gct3defsH3kcBnipn2SluU <durgarao430@gmail.com>
+The key's randomart image is:
++---[RSA 4096]----+
+|      ...+o.o+.o.|
+|       .. ooO o =|
+|        .+.O @.=+|
+|       .o + % %=o|
+|       .S. * @ E+|
+|          . o + .|
+|                 |
+|                 |
+|                 |
++----[SHA256]-----+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCz782g+9Y/mgd4wH+xPXRt8j+/AF+uy3PGcXOCSBkDo5OA+3MT2hlRQpPfxoNyBF7SusGtCXbwX+QZYa0QoKneIH12Ib8ZDYXHR1rzzFayn4T5p3mGyrryi/tksb4PUSN7tbIM3U0ZiVmlSKYjTrtRclEveVj6WVdqh+PlXBvNH4AeTV97Ha3KvCd6wMLDX4XGckamsVO527RcpyeOGd8uEhw2wcVyf+fOAw2D6HQLlRJijPbRxUNmcp2jbFrjKGec1rQT7Lu756wCn14wWXig8vmQw6hPjAO5a5MS4dYnmx38VKJ/6r4yZb3Iv9W45z7L8hqH63xiNHLeXxqKTkEQzbTH+RyRInlo9kekOuUlYf4j+1QrfRqr9HoXbu/yIBbF6l5A4HssMIS+8XKpK3PUXeoqB3TJvFRJZlesPZpTKjYOLaIY03EBbn+MkAnoTG5Qe5c478LtTzcycaAwPvMlt35fwfGTro+NF6n4pokArVws1Yvhe1j5KKh6cRvBbTjfcCfE695HNJUAmII/GeBDdP1c10DAYTaZki1yKgkNyyvd9julpymmklDnQOBcmtQoXhXFhQgjr9CA2xaM9fdk/afgDIPWNwffyMLqEyKXKGVd2mhgcfigwR85TXtkhUDJKt/iXvRoS7KaAB8BxkNwRaQ1vbuZBowjbgCcigM7sw== <durgarao430@gmail.com>
+
+git@github.com:durgarao3951/test_code.git
